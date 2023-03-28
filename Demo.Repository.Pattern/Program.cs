@@ -78,7 +78,7 @@ namespace Demo.Repository.Pattern
             Expression<Func<Product, bool>> exp1 = p => p.Name.Contains("One") && p.UnitPrice > 1;
             Expression<Func<Product, bool>> exp2 = BuildExpression<Product>(dict);
 
-            Func<Product, bool> func1 = BuildFunc<Product>(
+            Func<Product, bool> func1 = BuildFunction<Product>(
                     p => p.Name.Contains("One"), p => p.UnitPrice > 1
                 );
 
@@ -127,7 +127,7 @@ namespace Demo.Repository.Pattern
             return Expression.Lambda<Func<T, bool>>(andExpression, parameterExpression);
         }
 
-        public static Func<T, bool> BuildFunc<T>(params Expression<Func<T, bool>>[] conditions)
+        public static Func<T, bool> BuildFunction<T>(params Expression<Func<T, bool>>[] conditions)
         {
             ParameterExpression param = Expression.Parameter(typeof(T), "entity");
             Expression? body = null;
